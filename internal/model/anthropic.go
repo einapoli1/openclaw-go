@@ -19,10 +19,15 @@ type Message struct {
 	Content []Content `json:"content"`
 }
 
-// Content represents a content block in a message
+// Content represents a content block in a message (text, tool_use, or tool_result)
 type Content struct {
-	Type string `json:"type"`
-	Text string `json:"text,omitempty"`
+	Type        string          `json:"type"`
+	Text        string          `json:"text,omitempty"`
+	ID          string          `json:"id,omitempty"`           // tool_use
+	Name        string          `json:"name,omitempty"`         // tool_use
+	Input       json.RawMessage `json:"input,omitempty"`        // tool_use
+	ToolUseID   string          `json:"tool_use_id,omitempty"`  // tool_result
+	IsError     bool            `json:"is_error,omitempty"`     // tool_result
 }
 
 // ChatRequest is a request to the model
